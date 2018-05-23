@@ -1,5 +1,8 @@
+#To generate a dataset in form of adjacency matrix run this file with an argument n to gen n by n adj Matrix
+
 import random
-size = 1000
+import sys
+size = int(sys.argv[1])
 one_row = 0
 print size
 for i in range(10):
