@@ -1,12 +1,17 @@
-#define _GNU_SOURCE
+//#define _GNU_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 #include "filereader.h"
 
-
-void readInput(Matrix *MatA, char *fileName, double dampingFactor)
+/*
+    filename: file to be read
+    MatA: the pointer to the matrix into which the file is read
+    damping factor: randomness factor to account for jumps between pages without using links on the internet
+    Output: MatA
+*/
+void readInput(Matrix *MatA,const char *fileName, double dampingFactor)
 {
     FILE *fp = fopen(fileName, "r");
     char *line = NULL;
@@ -20,16 +25,21 @@ void readInput(Matrix *MatA, char *fileName, double dampingFactor)
     double randomJumpFactor;
     while(getline(&line, &len, fp) != -1)
     {
-        //printf("\n line = %s ", line);
         if(fold == 0)
         {
             numOfWebPages = atoi(line);
             randomJumpFactor = (1 - dampingFactor) / (numOfWebPages);
 
             A  = (double **)malloc(sizeof(double *) * numOfWebPages);
-            A[0] = (double *)calloc(sizeof(double), numOfWebPages * numOfWebPages);
-            for(i = 0; i < numOfWebPages; i++)
-                A[i] = (*A + numOfWebPages * i);
+            if(A==NULL){
+                printf("Memory nahi mila :(\n");
+            }
+            for(int index = 0; index<numOfWebPages; index++ ){
+                A[index] = (double *)calloc(sizeof(double), numOfWebPages);
+                if(A[index]==NULL){
+                    printf("Memory nahi mila :( a[%d] ko\n", index);
+                }
+            }
             fold++;
         }
         else

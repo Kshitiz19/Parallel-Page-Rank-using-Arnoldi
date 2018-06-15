@@ -3,5 +3,5 @@
 
 #include "matrix.h"
 
-void readInput(Matrix* A, char *fileName, double dampingFactor);
+void readInput(Matrix* A,const char *fileName, double dampingFactor);
 #endif
