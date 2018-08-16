@@ -4,6 +4,8 @@ Matrix Operations
 #include "matrix.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+// Reinitialize matrix with 0
 void setNull(double** A, int rows, int cols){
     for(int i=0;i<rows;i++){
                 for(int j=0;j<cols;j++){
@@ -11,6 +13,8 @@ void setNull(double** A, int rows, int cols){
                 }
             }
 }
+
+// Create new matrix
 void initMatrix(Matrix* A, int rows, int cols){
     double **a;
     a  = (double **)malloc(sizeof(double *) * rows);
@@ -21,6 +25,8 @@ void initMatrix(Matrix* A, int rows, int cols){
     A->A_rows = rows;
     A->A_cols = cols;
 }
+
+// Display Matrix
 void displayMat(Matrix* Mat){
     for(int i=0; i<Mat->A_rows; i++){
         for (int j = 0;  j < Mat->A_cols; j++){
@@ -36,6 +42,7 @@ void displayVector(double* q, int length){
     }
 }
 
+// Display Matrix in binary
 void displayMatStruct(Matrix* Mat){
     for(int i=0; i<Mat->A_rows; i++){
         for (int j = 0;  j <Mat->A_cols; j++){
@@ -47,6 +54,8 @@ void displayMatStruct(Matrix* Mat){
         printf("\n");
     }
 }
+
+
 void matrixTranspose(Matrix* Mat){
     double temp;
     for(int i=0; i<Mat->A_rows; i++){

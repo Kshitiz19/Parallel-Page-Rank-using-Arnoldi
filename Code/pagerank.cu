@@ -341,9 +341,9 @@ int main()
     // end fold
     int x = 1;
     if(h_q[0] < 0) x = -1;
-    //printf("Eigenvector : \n");
+    printf("Eigenvector : \n");
     for(int i=0;i < n;i++){
-           //printf("%lf\n",x*h_q[i]);
+        	printf("%lf\n",x*h_q[i]);
         }
 
     free(A.A[0]);
