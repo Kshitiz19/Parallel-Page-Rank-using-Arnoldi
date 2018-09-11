@@ -126,24 +126,6 @@ int main(int argc, char** argv)
         devInfo);
         cudaDeviceSynchronize();
 
-/*
-        cudaMemcpy(U , d_U , sizeof(double)*lda*rows, cudaMemcpyDeviceToHost);
-        cudaMemcpy(VT, d_VT, sizeof(double)*lda*cols, cudaMemcpyDeviceToHost);
-        cudaMemcpy(S , d_S , sizeof(double)*cols , cudaMemcpyDeviceToHost);
-        cudaMemcpy(&info_gpu, devInfo, sizeof(int), cudaMemcpyDeviceToHost);
-
-        printf("S = (matlab base-1)\n");
-        printMatrix(cols, 1, S, lda, "S");
-        printf("=====\n");
-
-        printf("U = (matlab base-1)\n");
-        printMatrix(rows, rows, U, lda, "U");
-        printf("=====\n");
-
-        printf("VT = (matlab base-1)\n");
-        printMatrix(cols, cols, VT, lda, "VT");
-        printf("=====\n");
-*/
         get_v<<<1, k>>>(d_VT, d_v, k);
 
         saxpy<<<n/NUM_THREADS + 1, NUM_THREADS, k*sizeof(double)>>>(d_Q, d_v, d_q1, n, k);
@@ -161,6 +143,8 @@ int main(int argc, char** argv)
 
         if (err != cudaSuccess) printf("Error above: %s\n", cudaGetErrorString(err));
 
+
+	// Use this code if you want to break based on a certain condition
 
         /*if(normDiff < 0.000001){
             printf("Converged in %d folds.\n", fold);
@@ -184,6 +168,8 @@ int main(int argc, char** argv)
     cudaFree(d_work);
 
     // end fold
+
+	
     //printf("Eigenvector : \n");
     for(int i=0;i < n;i++){
            //printf("%lf\n",abs(h_q[i]));

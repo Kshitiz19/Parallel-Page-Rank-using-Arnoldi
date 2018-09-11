@@ -1,4 +1,6 @@
-# Usage: python gen.py <sizeOfDataset> > <filename>
+# Usage: python gen.py "sizeOfDataset" > "output-filename"
+# size of dataset is a integer n that results into a n x n sparse adjacency matrix
+
 import random
 import sys
 from tqdm import tqdm
