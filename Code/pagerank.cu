@@ -165,7 +165,7 @@ void *threadSVD(void *vargp)
 }
 
 
-int main()
+int main(int argc, char** argv)
 {
     cudaError_t err = cudaSuccess;
     int k = 16;
@@ -182,9 +182,8 @@ int main()
     double *d_A, *h_A, *h_q;
     double *d_v;
     double *d_H2, *d_q2, *d_Q2;
-    
 
-    readInput(&A,"ip3.txt",0.85);
+    readInput(&A, argv[1], 0.85);
     n = A.A_rows;
 
     matrixTranspose(&A);
@@ -339,13 +338,15 @@ int main()
     cudaFree(d_work);
 
     // end fold
+
+/*
     int x = 1;
     if(h_q[0] < 0) x = -1;
     printf("Eigenvector : \n");
     for(int i=0;i < n;i++){
-        	printf("%lf\n",x*h_q[i]);
+           printf("%lf\n",x*h_q[i]);
         }
-
+*/
     free(A.A[0]);
     free(A.A);
     free(h_A);
